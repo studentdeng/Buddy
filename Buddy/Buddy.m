@@ -178,9 +178,14 @@ static Buddy *sharedPlugin;
                                            {
                                                totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for 1 minute"];
                                            }
-                                           else
+                                           else if (self.timeInMin <= 60)
                                            {
                                                totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for %d minutes", self.timeInMin];
+                                           }
+                                           else
+                                           {
+                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for %d h %d min",
+                                                                   self.timeInMin / 60, self.timeInMin % 60];
                                            }
                                            
                                            NSAlert *alert = [NSAlert alertWithMessageText:totalTimeMessage
