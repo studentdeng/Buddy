@@ -12,3 +12,7 @@ Xcode5 plugin for fun
 ##install
 
 clone this repo Build the project and restart Xcode
+
+##server
+
+[code](https://github.com/studentdeng/buddy_server)
