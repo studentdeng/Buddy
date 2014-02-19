@@ -11,7 +11,7 @@
 #import "APIManager.h"
 #import "UserManager.h"
 
-#define TIME_INTERVAL_MIN 30
+#define TIME_INTERVAL_MIN 1
 
 static Buddy *sharedPlugin;
 
@@ -97,7 +97,7 @@ static Buddy *sharedPlugin;
         [self goToOnline];
         
         [self.onLineTimer invalidate];
-        self.onLineTimer = [NSTimer scheduledTimerWithTimeInterval:TIME_INTERVAL_MIN target:self selector:@selector(onLineTimerProc) userInfo:nil repeats:YES];
+        self.onLineTimer = [NSTimer scheduledTimerWithTimeInterval:TIME_INTERVAL_MIN * 60 target:self selector:@selector(onLineTimerProc) userInfo:nil repeats:YES];
     }
 }
 
@@ -169,7 +169,19 @@ static Buddy *sharedPlugin;
                                                message = [NSString stringWithFormat:@"Only YOU working at this moment !!"];
                                            }
                                            
-                                           NSString *totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for %d h", self.timeInMin / 60];
+                                           NSString *totalTimeMessage;
+                                           
+                                           if (self.timeInMin == 0) {
+                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding less than 1 minute"];
+                                           }
+                                           else if (self.timeInMin == 1)
+                                           {
+                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for 1 minute"];
+                                           }
+                                           else
+                                           {
+                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for %d minutes", self.timeInMin];
+                                           }
                                            
                                            NSAlert *alert = [NSAlert alertWithMessageText:totalTimeMessage
                                                                             defaultButton:nil
