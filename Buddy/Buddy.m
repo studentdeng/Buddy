@@ -54,7 +54,7 @@ static Buddy *sharedPlugin;
 
 - (void)setup
 {
-    NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
+    NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"View"];
     if (menuItem) {
         [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
         NSMenuItem *actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Buddy" action:@selector(doMenuAction) keyEquivalent:@""];

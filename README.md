@@ -1,4 +1,11 @@
 Buddy
 =====
 
-xcode5 plugin for fun
+Xcode5 plugin for fun
+
+* find online buddies at this moment
+* find your coding hours
+
+##install
+
+clone this repo Build the project and restart Xcode
