@@ -10,8 +10,11 @@
 #import "BuddyAPI.h"
 #import "APIManager.h"
 #import "UserManager.h"
+#import "FormatManager.h"
 
 #define TIME_INTERVAL_MIN 1
+#define BUILT_TOTAL_TIME_KEY    @"curer.built_total_time"
+#define CODING_TOTAL_TIME_KEY   @"curer.code_total_time"
 
 static Buddy *sharedPlugin;
 
@@ -21,6 +24,9 @@ static Buddy *sharedPlugin;
 @property (nonatomic, strong) NSTimer *onLineTimer;
 
 @property (nonatomic, assign) int timeInMin;
+
+@property (nonatomic, assign) double builtTimeInSec;
+@property (nonatomic, strong) NSDate *buildDate;
 
 @end
 
@@ -54,6 +60,9 @@ static Buddy *sharedPlugin;
 
 - (void)setup
 {
+    self.builtTimeInSec = [[[NSUserDefaults standardUserDefaults] objectForKey:BUILT_TOTAL_TIME_KEY] doubleValue];
+    self.timeInMin = [[[NSUserDefaults standardUserDefaults] objectForKey:CODING_TOTAL_TIME_KEY] intValue];
+    
     NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"View"];
     if (menuItem) {
         [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
@@ -73,7 +82,8 @@ static Buddy *sharedPlugin;
                                                                name:NSWorkspaceDidDeactivateApplicationNotification
                                                              object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:nil object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(IDEBuildOperationWillStartNotificationFunc:) name:@"IDEBuildOperationWillStartNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(IDEBuildOperationDidStopNotificationFunc:) name:@"IDEBuildOperationDidStopNotification" object:nil];
     
     [self goToOnline];
     
@@ -81,13 +91,20 @@ static Buddy *sharedPlugin;
     self.onLineTimer = [NSTimer scheduledTimerWithTimeInterval:TIME_INTERVAL_MIN * 60 target:self selector:@selector(onLineTimerProc) userInfo:nil repeats:YES];
 }
 
-- (void)notificationLog:(NSNotification *)notify
+- (void)IDEBuildOperationWillStartNotificationFunc:(NSNotification *)notify
 {
-    if (![notify.name hasPrefix:@"IDEBuildOperation"]) {
-        return;
-    }
+    self.buildDate = [NSDate date];
+}
+
+- (void)IDEBuildOperationDidStopNotificationFunc:(NSNotification *)notify
+{
+    NSDate *now = [NSDate date];
     
-    NSLog(@"%@", notify.name);
+    NSTimeInterval sec = [now timeIntervalSinceDate:self.buildDate];
+    
+    self.builtTimeInSec += sec;
+    
+    [self saveToDisk];
 }
 
 #pragma mark - time proc
@@ -180,34 +197,27 @@ static Buddy *sharedPlugin;
                                                message = [NSString stringWithFormat:@"Only YOU working at this moment !!"];
                                            }
                                            
-                                           NSString *totalTimeMessage;
+                                           NSString *totalTimeMessage = [FormatManager codingTime:self.timeInMin];
+                                           NSString *totalBuiltMessage = [FormatManager builtTime:(int)self.builtTimeInSec];
                                            
-                                           if (self.timeInMin == 0) {
-                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding less than 1 minute"];
-                                           }
-                                           else if (self.timeInMin == 1)
-                                           {
-                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for 1 minute"];
-                                           }
-                                           else if (self.timeInMin <= 60)
-                                           {
-                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for %d minutes", self.timeInMin];
-                                           }
-                                           else
-                                           {
-                                               totalTimeMessage = [NSString stringWithFormat:@"Now YOU have been coding for %d h %d min",
-                                                                   self.timeInMin / 60, self.timeInMin % 60];
-                                           }
+                                           NSString *text = [NSString stringWithFormat:@"%@\n%@", totalTimeMessage, totalBuiltMessage];
                                            
-                                           NSAlert *alert = [NSAlert alertWithMessageText:totalTimeMessage
+                                           NSAlert *alert = [NSAlert alertWithMessageText:message
                                                                             defaultButton:nil
                                                                           alternateButton:nil
                                                                               otherButton:nil
-                                                                informativeTextWithFormat:message, nil];
+                                                                informativeTextWithFormat:text, nil];
                                            [alert runModal];
                                        }
                                    }
                                }];
+}
+
+- (void)saveToDisk
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:self.builtTimeInSec] forKey:BUILT_TOTAL_TIME_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:self.timeInMin] forKey:CODING_TOTAL_TIME_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)showMessage:(NSString *)text

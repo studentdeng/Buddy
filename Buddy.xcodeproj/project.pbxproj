@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7172EBD18B6076C009F561C /* FormatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7172EBC18B6076C009F561C /* FormatManager.m */; };
 		D74F084118B46BBE00A88B64 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74F084018B46BBE00A88B64 /* AppKit.framework */; };
 		D74F084318B46BBE00A88B64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D74F084218B46BBE00A88B64 /* Foundation.framework */; };
 		D74F084918B46BBE00A88B64 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D74F084718B46BBE00A88B64 /* InfoPlist.strings */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D7172EBB18B6076C009F561C /* FormatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatManager.h; sourceTree = "<group>"; };
+		D7172EBC18B6076C009F561C /* FormatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatManager.m; sourceTree = "<group>"; };
 		D74F083D18B46BBE00A88B64 /* Buddy.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Buddy.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74F084018B46BBE00A88B64 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D74F084218B46BBE00A88B64 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -117,6 +120,8 @@
 			children = (
 				D75D8C8D18B4A25F00826D51 /* UserManager.h */,
 				D75D8C8E18B4A25F00826D51 /* UserManager.m */,
+				D7172EBB18B6076C009F561C /* FormatManager.h */,
+				D7172EBC18B6076C009F561C /* FormatManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 			files = (
 				D74F084C18B46BBE00A88B64 /* Buddy.m in Sources */,
 				D7FB7E1118B49551002667D5 /* BuddyAPI.m in Sources */,
+				D7172EBD18B6076C009F561C /* FormatManager.m in Sources */,
 				D75D8C8F18B4A25F00826D51 /* UserManager.m in Sources */,
 				D776C5BC18B497F3006F29BF /* APIManager.m in Sources */,
 			);
