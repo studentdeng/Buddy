@@ -3,15 +3,20 @@ Buddy
 
 Xcode5 plugin for fun
 
+How much time we spend on building in our life? 
+
+#features
+
 * find online buddies at this moment
-* find your coding hours
+* find your time on coding
+* find your time on building
 
 ![image](buddy.png)
 
 
 ##install
 
-clone this repo Build the project and restart Xcode
+clone this repo build the project and restart Xcode
 
 ##server
 
