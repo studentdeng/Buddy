@@ -73,10 +73,21 @@ static Buddy *sharedPlugin;
                                                                name:NSWorkspaceDidDeactivateApplicationNotification
                                                              object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:nil object:nil];
+    
     [self goToOnline];
     
     [self.onLineTimer invalidate];
     self.onLineTimer = [NSTimer scheduledTimerWithTimeInterval:TIME_INTERVAL_MIN * 60 target:self selector:@selector(onLineTimerProc) userInfo:nil repeats:YES];
+}
+
+- (void)notificationLog:(NSNotification *)notify
+{
+    if (![notify.name hasPrefix:@"IDEBuildOperation"]) {
+        return;
+    }
+    
+    NSLog(@"%@", notify.name);
 }
 
 #pragma mark - time proc
