@@ -23,7 +23,7 @@
 /* Begin PBXFileReference section */
 		D7172EBB18B6076C009F561C /* FormatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatManager.h; sourceTree = "<group>"; };
 		D7172EBC18B6076C009F561C /* FormatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatManager.m; sourceTree = "<group>"; };
-		D74F083D18B46BBE00A88B64 /* Buddy.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Buddy.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D74F083D18B46BBE00A88B64 /* CUBuddy.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CUBuddy.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74F084018B46BBE00A88B64 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D74F084218B46BBE00A88B64 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D74F084618B46BBE00A88B64 /* Buddy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Buddy-Info.plist"; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		D74F083E18B46BBE00A88B64 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D74F083D18B46BBE00A88B64 /* Buddy.xcplugin */,
+				D74F083D18B46BBE00A88B64 /* CUBuddy.xcplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 			);
 			name = Buddy;
 			productName = Buddy;
-			productReference = D74F083D18B46BBE00A88B64 /* Buddy.xcplugin */;
+			productReference = D74F083D18B46BBE00A88B64 /* CUBuddy.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -312,7 +312,7 @@
 				);
 				INFOPLIST_FILE = "Buddy/Buddy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CUBuddy;
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Debug;
@@ -332,7 +332,7 @@
 				);
 				INFOPLIST_FILE = "Buddy/Buddy-Info.plist";
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CUBuddy;
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Release;
